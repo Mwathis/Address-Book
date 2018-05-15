@@ -4,6 +4,9 @@ class Contact {
     this.lastName=lastName;
     this.phoneNumber=phoneNumber;
   }
+  fullName(){
+    return `${this.firstName} ${this.lastName}`;
+  }
 }
 
 $(document).ready(function(){
@@ -24,6 +27,21 @@ $(document).ready(function(){
     // clear values from form input fields
     //document.getElementById("new-contact").reset();
     $(this).trigger("reset");
-    $("ul#contacts").append("<li>" +newContact.lastName+ "," +newContact.firstName+"</li>");
+    $("ul#contacts").append(
+      `<li
+          class="contact"
+          id=${allContacts.length -1}>
+          ${newContact.lastName},${newContact.firstName}
+      </li>`
+    );
+
+    $("li").click(function(event){
+      var id=event.target.id;
+      var contact=allContacts[id];
+
+      $("#contact-full-name").text(contact.fullName());
+      $("#contact-phone-number").text(contact.phoneNumber);
+
+    });
   });
 });
