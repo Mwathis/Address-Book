@@ -7,11 +7,34 @@ class Contact {
   fullName(){
     return `${this.firstName} ${this.lastName}`;
   }
+  reversedFullName(){
+    return `${this.lastName} ${this.firstName}`;
+  }
 }
 
 $(document).ready(function(){
   //Define empty array to hold contact objects
   var allContacts=[];
+
+  function displayAllContacts(contacts) {
+    $('ul#contacts')empty();
+
+    contacts.sort(function(){
+      return a["lastName"].codePointAt(0) -b["lastName"].codePointAt(0);
+    });
+
+    contacts.forEach(fuction(contact, index){
+      $("ul#contacts").append(
+        `<li
+            title="Click to view details"
+            class="contact"
+            id=${index}>
+            <span class="contact-list-item">${contact.reversedFullName()}</span>
+            <span class="delete-contact" title="delete">&#120;</span>
+        </li>`
+      );
+    });
+  }
 
   $("form#new-contact").submit(function(event){
     event.preventDefault();
@@ -27,21 +50,23 @@ $(document).ready(function(){
     // clear values from form input fields
     //document.getElementById("new-contact").reset();
     $(this).trigger("reset");
-    $("ul#contacts").append(
-      `<li
-          class="contact"
-          id=${allContacts.length -1}>
-          ${newContact.lastName},${newContact.firstName}
-      </li>`
-    );
+    displayAllContacts(allContacts);
 
-    $("li").click(function(event){
+    $(".contact-list-item").click(function(event){
       var id=event.target.id;
       var contact=allContacts[id];
 
       $("#contact-full-name").text(contact.fullName());
       $("#contact-phone-number").text(contact.phoneNumber);
 
+    });
+    $('.delete-contact').click(function(){
+      if(confirm("Are you sure you want to delete this contact?")) {
+        var id =$(this).parent().attr("id");
+
+        allContacts.splice(id, 1);
+        displayAllContacts(allContacts);
+      }
     });
   });
 });
