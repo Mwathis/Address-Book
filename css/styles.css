@@ -1,3 +1,11 @@
 body {
   background-color: grey;
 }
+.delete-contact {
+  cursor: pointer;
+  font-size: 22pt;
+  color: red;
+}
+.hidden {
+  display: none;
+}
