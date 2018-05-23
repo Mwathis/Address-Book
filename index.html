@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Address Book</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <title>Address Book</title>
 </head>
 <body>
   <div class="container">
@@ -14,15 +18,20 @@
         <form id="new-contact">
           <div class="form-group">
             <label for="first-name">First Name</label>
-            <input type="text" id="first-name">
+            <input class="form-control" type="text" id="first-name" minLength="2" maxlength="20"
+            pattern="^[a-zA-Z]+$" required>
           </div>
           <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input type="text" id="last-name">
+            <input class="form-control" type="text" id="last-name" minLength="2" maxlength="20"
+            pattern="^[a-zA-Z]+$" required>
           </div>
           <div class="form-group">
             <label for="phone-number">Phone Number</label>
-            <input type="text" id="phone-number">
+            <input class="form-control" type="text" id="phone-number"
+            placeholder="ex: 07xxxxxxxx, 2547xxxxxxxx, or +2547xxxxxxxx"
+            pattern="^(?:254|\+254|0)?(7(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$"
+             required>
           </div>
           <button class="btn btn-primary" type="submit">Add Contact</button>
         </form>
@@ -34,8 +43,37 @@
     </div>
     <hr>
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <h2>Contact Details</h2>
+        <div id="contact-details" class="hidden">
+          <p>Name:<span id="contact-full-name"></span></p>
+          <p>Phone:<span id="contact-phone-number"></span></p>
+          <button class="btn btn-primary" id="edit-contact-button">Edit Contact</button>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div>
+          <form id="edit-contact-form" class="hidden">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <input class="form-control" type="text" id="first-name" minLength="2" maxlength="20"
+              pattern="^[a-zA-Z]+$" required>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input class="form-control" type="text" id="last-name" minLength="2" maxlength="20"
+              pattern="^[a-zA-Z]+$" required>
+            </div>
+            <div class="form-group">
+              <label for="phone-number">Phone Number</label>
+              <input class="form-control" type="text" id="phone-number"
+              placeholder="ex: 07xxxxxxxx, 2547xxxxxxxx, or +2547xxxxxxxx"
+              pattern="^(?:254|\+254|0)?(7(?:(?:[129][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$"
+               required>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
